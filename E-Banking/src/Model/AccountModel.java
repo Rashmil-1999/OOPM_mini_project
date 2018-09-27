@@ -10,18 +10,21 @@ package Model;
  * @author Ra-Pr-Ri
  */
 public class AccountModel {
-    private  final String first_name,last_name,DoB;
+    private  final String first_name,last_name,DoB,gender,nationality,mobile;
     final int pin,accountnum;
     int Balance;
     
    //constructor that initializes the default parameters on an account with initial balance as 0 
-   public AccountModel(String name,String last_name,String DoB,int pin,int accountnum){
+   public AccountModel(String name,String last_name,String gender,String nationality,String mobile,String DoB,int pin,int accountnum){
        this.first_name = name;
        this.last_name = last_name;
        this.DoB = DoB;
        this.pin = pin;
        this.accountnum = accountnum;
        this.Balance = 0;
+       this.gender = gender;
+       this.mobile = mobile;
+       this.nationality = nationality;
    }
    
     /**
@@ -32,13 +35,16 @@ public class AccountModel {
      * @param pin
      * @param balance
      */
-    public AccountModel(String name,String last_name,String DoB,int pin ,int balance ,int accountnum){
+    public AccountModel(String name,String last_name,String gender,String nationality,String mobile,String DoB,int pin ,int balance ,int accountnum){
         this.pin = pin;
         this.Balance = balance;
         this.first_name = name;
         this.last_name = last_name;
         this.DoB = DoB;
         this.accountnum = accountnum ;
+        this.gender = gender;
+        this.mobile = mobile;
+        this.nationality = nationality;
    }
    
    //getter functions
@@ -59,6 +65,15 @@ public class AccountModel {
    }
    public int getBalance(){
        return this.Balance;
+   }
+   public String getGender(){
+       return this.gender;
+   }
+   public String getNationality(){
+       return this.nationality;
+   }
+   public String getMobile(){
+       return this.mobile;
    }
    
    //methods of deposit withdraw and transfer

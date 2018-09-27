@@ -48,26 +48,32 @@ public class DatabaseFile {
      * @param pin
      * @param balance
      */
-    public void add(String name,String last_name,String dob,int pin,int balance){
+    public void add(String name,String last_name,String gender,String nationality,String mobile,String dob,int pin,int balance){
            try{
                add_stm.setString(1,name);
                add_stm.setString(2,last_name);
-               add_stm.setString(3,dob);
-               add_stm.setInt(4, pin);
-               add_stm.setInt(5, balance);
+               add_stm.setString(3,gender);
+               add_stm.setString(4,nationality);
+               add_stm.setString(5,mobile);
+               add_stm.setString(6,dob);
+               add_stm.setInt(7, pin);
+               add_stm.setInt(8, balance);
                add_stm.executeUpdate();
            }catch(SQLException e){
                e.printStackTrace();
            }
     } 
     
-    public void add1st(String name,String last_name,String dob,int pin,int balance){
+    public void add1st(String name,String last_name,String gender,String nationality,String mobile,String dob,int pin,int balance){
         try{
                add1st_stm.setString(1,name);
                add1st_stm.setString(2,last_name);
-               add1st_stm.setString(3,dob);
-               add1st_stm.setInt(4, pin);
-               add1st_stm.setInt(5, balance);
+               add1st_stm.setString(3, gender);
+               add1st_stm.setString(4,nationality);
+               add1st_stm.setString(5, mobile);
+               add1st_stm.setString(6,dob);
+               add1st_stm.setInt(7, pin);
+               add1st_stm.setInt(8, balance);
                add1st_stm.executeUpdate();
         }catch(SQLException e){
                e.printStackTrace();
@@ -90,12 +96,15 @@ public class DatabaseFile {
             
             String name = rs.getString("first_name");
             String last_name = rs.getString("last_name");
+            String gender = rs.getString("gender");
+            String nationality = rs.getString("nationality");
+            String mobile = rs.getString("mobile");
             String dob = rs.getString("dob");
             int pin = rs.getInt("pin");
             int balance = rs.getInt("balance");
             int accountnum = rs.getInt("accountnum");
             
-            return new AccountModel(name,last_name,dob,pin,balance,accountnum);
+            return new AccountModel(name,last_name,gender,nationality,mobile,dob,pin,balance,accountnum);
         }catch(SQLException e){
             e.printStackTrace();
         }

@@ -18,6 +18,9 @@ abstract class Query {
                     "accountnum INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "first_name varchar(30) NOT NULL, " +
                     "last_name varchar(30) NOT NULL, " +
+                    "gender TEXT,"+
+                    "nationality TEXT,"+
+                    "mobile TEXT,"+
                     "dob DATE NOT NULL, " +
                     "pin INTEGER NOT NULL, " +
                     "balance INTEGER NOT NULL" +
@@ -28,14 +31,14 @@ abstract class Query {
 
     ADD =
             (
-            "INSERT INTO accounts (first_name,last_name,dob,pin,balance) VALUES " +
-                    "(?, ?, ?, ?, ?);"
+            "INSERT INTO accounts (first_name,last_name,gender,nationality,mobile,dob,pin,balance) VALUES " +
+                    "(?, ?, ?, ?, ?, ?, ?, ?);"
             ),
             
     ADD1 =  
             (
             "INSERT INTO accounts VALUES" +
-                    "(1000,?,?,?,?,?)"
+                    "(1000,?,?,?,?,?,?,?,?)"
             ),
 
     DEL =
