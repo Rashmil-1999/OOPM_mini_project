@@ -10,13 +10,16 @@ import Model.DatabaseFile;
 //default files imports
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import java.sql.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  *
  * @author RA_PR_RI
  */
 public class CREATE_ACCOUNT extends javax.swing.JFrame {
-    protected String name,gender,last_name,nationality,acc_type,dob,mobile,username;
+    protected String name,gender="",last_name,nationality,acc_type="",dob,mobile,username;
     protected int accnum,pin;
 
     /**
@@ -75,12 +78,6 @@ public class CREATE_ACCOUNT extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         jLabel6.setText("NATIONALITY");
 
-        C_Name.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                C_NameActionPerformed(evt);
-            }
-        });
-
         jLabel7.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         jLabel7.setText("ACCOUNT TYPE");
 
@@ -131,12 +128,6 @@ public class CREATE_ACCOUNT extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         jLabel2.setText("Username:");
-
-        C_Username.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                C_UsernameActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -257,10 +248,6 @@ public class CREATE_ACCOUNT extends javax.swing.JFrame {
         setBounds(0, 0, 913, 583);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void C_NameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C_NameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_C_NameActionPerformed
-
     private void CREATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CREATEActionPerformed
         DatabaseFile db = new DatabaseFile();
         
@@ -271,36 +258,44 @@ public class CREATE_ACCOUNT extends javax.swing.JFrame {
         dob = C_Dob.getText();
         username = C_Username.getText();
         
-        if(name == "" && last_name == "" && nationality == "" && mobile == "" && dob == "" && username == ""){
+        if(name == "" || last_name == "" || nationality == "" || mobile == "" || dob == "" || username == "" || gender == "" || acc_type == ""){
             JOptionPane.showMessageDialog(null, "Empty Feilds Not Allowed!", "Attention!", JOptionPane.ERROR_MESSAGE);
         }
-        
-        try{
-            pin = Integer.parseInt(C_Pin.getText());
-        }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "INVALID  OR MISSING INPUT , ONLY INTEGERS ACCEPTED FOR Pin!", "Attention!", JOptionPane.ERROR_MESSAGE);
-        }
-        
-        int count = db.count();
-        if(count == 0){
-            db.add1st(username,name,last_name,gender,nationality,mobile,dob,pin,0);
-        }
         else{
-            AccountModel user = db.getAccount(username);
-            if(user.getUsername() == null ){
-                db.add(username,name, last_name, gender, nationality, mobile, dob, pin, 0);
-                C_Name.setText(""); 
-                C_Lastname.setText("");
-                C_Nationality.setText("");    
-                C_Mobile.setText("");
-                C_Dob.setText("");
-                C_Username.setText("");
+            
+            try{
+                pin = Integer.parseInt(C_Pin.getText());
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "INVALID  OR MISSING INPUT , ONLY INTEGERS ACCEPTED FOR Pin!", "Attention!", JOptionPane.ERROR_MESSAGE);
+            }
+        
+            int count = db.count();
+            if(count == 0){
+                db.add1st(username,name,last_name,gender,nationality,mobile,dob,pin,0);
             }
             else{
-                JOptionPane.showMessageDialog(null, "Username already exists!\nChoose a new Username please.", "Error!", JOptionPane.ERROR_MESSAGE);
-                C_Username.setText("");
+           
+                try{
+                    if(db.validateInsert(username)){
+                        db.add(username,name, last_name, gender, nationality, mobile, dob, pin, 0);
+                        C_Name.setText(""); 
+                        C_Lastname.setText("");
+                        C_Nationality.setText("");    
+                        C_Mobile.setText("");
+                        C_Dob.setText("");
+                        C_Username.setText("");
+                        C_Pin.setText("");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Username already exists choose again!", "Attention!", JOptionPane.ERROR_MESSAGE);
+                        C_Username.setText("");
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
             }
         }
+        
         
     }//GEN-LAST:event_CREATEActionPerformed
 
@@ -316,10 +311,6 @@ public class CREATE_ACCOUNT extends javax.swing.JFrame {
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
         gender = jRadioButton3.getText();
     }//GEN-LAST:event_jRadioButton3ActionPerformed
-
-    private void C_UsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C_UsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_C_UsernameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,11 +340,20 @@ public class CREATE_ACCOUNT extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        CREATE_ACCOUNT obj = new CREATE_ACCOUNT();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CREATE_ACCOUNT().setVisible(true);
+                obj.setVisible(true);
             }
         });
+        obj.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Dispose the window after the close button is clicked.
+                obj.dispose();
+            }
+        });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

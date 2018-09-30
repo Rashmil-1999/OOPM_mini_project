@@ -51,7 +51,16 @@ abstract class Query {
             (
             "SELECT COUNT(*) FROM accounts;"
             ),
-
+    COUNT_BY_USER = (
+                    "SELECT COUNT(*) FROM accounts WHERE username = ? ;"
+                    ),        
+    EDIT =  (
+            "UPDATE accounts " +
+                    "SET balance = ? " +
+                    "WHERE username = '?' " +
+                    ";"
+            ),
+    
     GET =
             (
             "SELECT * FROM accounts WHERE username = ?;"
