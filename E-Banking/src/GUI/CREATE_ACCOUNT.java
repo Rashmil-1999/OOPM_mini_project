@@ -19,14 +19,16 @@ import java.awt.event.WindowEvent;
  * @author RA_PR_RI
  */
 public class CREATE_ACCOUNT extends javax.swing.JFrame {
+    DatabaseFile db;
     protected String name,gender="",last_name,nationality,acc_type="",dob,mobile,username;
     protected int accnum,pin;
 
     /**
      * Creates new form CREATE_ACCOUNT
      */
-    public CREATE_ACCOUNT() {
+    public CREATE_ACCOUNT(DatabaseFile db) {
         initComponents();
+        this.db = db;
     }
 
     /**
@@ -249,8 +251,7 @@ public class CREATE_ACCOUNT extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CREATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CREATEActionPerformed
-        DatabaseFile db = new DatabaseFile();
-        
+       
         name = C_Name.getText(); 
         last_name = C_Lastname.getText();
         nationality = C_Nationality.getText();    
@@ -258,7 +259,7 @@ public class CREATE_ACCOUNT extends javax.swing.JFrame {
         dob = C_Dob.getText();
         username = C_Username.getText();
         
-        if(name == "" || last_name == "" || nationality == "" || mobile == "" || dob == "" || username == "" || gender == "" || acc_type == ""){
+        if(name == "" || last_name == "" || nationality == "" || mobile == "" || dob == "" || username == "" || gender == "" || acc_type == "" || acc_type == "SELECT"){
             JOptionPane.showMessageDialog(null, "Empty Feilds Not Allowed!", "Attention!", JOptionPane.ERROR_MESSAGE);
         }
         else{
@@ -285,6 +286,7 @@ public class CREATE_ACCOUNT extends javax.swing.JFrame {
                         C_Dob.setText("");
                         C_Username.setText("");
                         C_Pin.setText("");
+                        JOptionPane.showMessageDialog(null, "Account Created Successfully!", "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "Username already exists choose again!", "Attention!", JOptionPane.ERROR_MESSAGE);
@@ -311,50 +313,6 @@ public class CREATE_ACCOUNT extends javax.swing.JFrame {
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
         gender = jRadioButton3.getText();
     }//GEN-LAST:event_jRadioButton3ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CREATE_ACCOUNT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CREATE_ACCOUNT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CREATE_ACCOUNT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CREATE_ACCOUNT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        CREATE_ACCOUNT obj = new CREATE_ACCOUNT();
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                obj.setVisible(true);
-            }
-        });
-        obj.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                // Dispose the window after the close button is clicked.
-                obj.dispose();
-            }
-        });
-        
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CREATE;

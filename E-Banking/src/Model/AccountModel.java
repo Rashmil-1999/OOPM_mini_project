@@ -68,11 +68,11 @@ public class AccountModel {
    }
    
    //methods of deposit withdraw and transfer
-   void deposit(int amt){
+   public void deposit(int amt){
        this.Balance +=amt;
    }
    
-   boolean ValidTransaction(int amt){
+   public boolean ValidTransaction(int amt){
        if (this.Balance > amt){
            return true;
        }
@@ -80,15 +80,7 @@ public class AccountModel {
            return false;
        }
    }
-   void withdraw(int amt){
+   public void withdraw(int amt){
        this.Balance -= amt;
    }
-   
-   void transfer(AccountModel target,int amt){
-           this.Balance -= amt;
-           target.Balance += amt;
-   }
-   
-   
-    
 }

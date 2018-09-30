@@ -57,7 +57,7 @@ abstract class Query {
     EDIT =  (
             "UPDATE accounts " +
                     "SET balance = ? " +
-                    "WHERE username = '?' " +
+                    "WHERE username = ? " +
                     ";"
             ),
     
