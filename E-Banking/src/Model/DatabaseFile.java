@@ -48,32 +48,34 @@ public class DatabaseFile {
      * @param pin
      * @param balance
      */
-    public void add(String name,String last_name,String gender,String nationality,String mobile,String dob,int pin,int balance){
+    public void add(String username,String name,String last_name,String gender,String nationality,String mobile,String dob,int pin,int balance){
            try{
-               add_stm.setString(1,name);
-               add_stm.setString(2,last_name);
-               add_stm.setString(3,gender);
-               add_stm.setString(4,nationality);
-               add_stm.setString(5,mobile);
-               add_stm.setString(6,dob);
-               add_stm.setInt(7, pin);
-               add_stm.setInt(8, balance);
+               add_stm.setString(1,username);
+               add_stm.setString(2,name);
+               add_stm.setString(3,last_name);
+               add_stm.setString(4,gender);
+               add_stm.setString(5,nationality);
+               add_stm.setString(6,mobile);
+               add_stm.setString(7,dob);
+               add_stm.setInt(8, pin);
+               add_stm.setInt(9, balance);
                add_stm.executeUpdate();
            }catch(SQLException e){
                e.printStackTrace();
            }
     } 
     
-    public void add1st(String name,String last_name,String gender,String nationality,String mobile,String dob,int pin,int balance){
+    public void add1st(String username,String name,String last_name,String gender,String nationality,String mobile,String dob,int pin,int balance){
         try{
-               add1st_stm.setString(1,name);
-               add1st_stm.setString(2,last_name);
-               add1st_stm.setString(3, gender);
-               add1st_stm.setString(4,nationality);
-               add1st_stm.setString(5, mobile);
-               add1st_stm.setString(6,dob);
-               add1st_stm.setInt(7, pin);
-               add1st_stm.setInt(8, balance);
+               add1st_stm.setString(1,username); 
+               add1st_stm.setString(2,name);
+               add1st_stm.setString(3,last_name);
+               add1st_stm.setString(4, gender);
+               add1st_stm.setString(5,nationality);
+               add1st_stm.setString(6, mobile);
+               add1st_stm.setString(7,dob);
+               add1st_stm.setInt(8, pin);
+               add1st_stm.setInt(9, balance);
                add1st_stm.executeUpdate();
         }catch(SQLException e){
                e.printStackTrace();
@@ -89,10 +91,11 @@ public class DatabaseFile {
         }
     }
     
-    public AccountModel getAccount(int acc_num){
+    public AccountModel getAccount(String username){
         try{
-            get_stm.setInt(1, acc_num);
+            get_stm.setString(1, username);
             ResultSet rs = get_stm.executeQuery();
+            
             
             String name = rs.getString("first_name");
             String last_name = rs.getString("last_name");
@@ -104,16 +107,19 @@ public class DatabaseFile {
             int balance = rs.getInt("balance");
             int accountnum = rs.getInt("accountnum");
             
-            return new AccountModel(name,last_name,gender,nationality,mobile,dob,pin,balance,accountnum);
+            return new AccountModel(username,name,last_name,gender,nationality,mobile,dob,pin,balance,accountnum);
+            
         }catch(SQLException e){
             e.printStackTrace();
         }
+        return null;
     }
     
     public int count(){
         int cnt = 0;
         
-        try(ResultSet rs = count_stm.executeQuery()){
+        try{
+            ResultSet rs = count_stm.executeQuery();
             cnt = rs.getInt(1);
         }catch(SQLException e){
             e.printStackTrace();

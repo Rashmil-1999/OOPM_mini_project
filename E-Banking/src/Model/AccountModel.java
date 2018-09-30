@@ -10,23 +10,10 @@ package Model;
  * @author Ra-Pr-Ri
  */
 public class AccountModel {
-    private  final String first_name,last_name,DoB,gender,nationality,mobile;
+    private  final String first_name,last_name,DoB,gender,nationality,mobile,username;
     final int pin,accountnum;
     int Balance;
-    
-   //constructor that initializes the default parameters on an account with initial balance as 0 
-   public AccountModel(String name,String last_name,String gender,String nationality,String mobile,String DoB,int pin,int accountnum){
-       this.first_name = name;
-       this.last_name = last_name;
-       this.DoB = DoB;
-       this.pin = pin;
-       this.accountnum = accountnum;
-       this.Balance = 0;
-       this.gender = gender;
-       this.mobile = mobile;
-       this.nationality = nationality;
-   }
-   
+  
     /**
      *
      * @param name
@@ -35,7 +22,8 @@ public class AccountModel {
      * @param pin
      * @param balance
      */
-    public AccountModel(String name,String last_name,String gender,String nationality,String mobile,String DoB,int pin ,int balance ,int accountnum){
+    public AccountModel(String username,String name,String last_name,String gender,String nationality,String mobile,String DoB,int pin ,int balance ,int accountnum){
+        this.username = username;
         this.pin = pin;
         this.Balance = balance;
         this.first_name = name;
@@ -48,6 +36,9 @@ public class AccountModel {
    }
    
    //getter functions
+    public String getUsername(){
+        return this.username;
+    }
    public String getName(){
        return this.first_name;
    }

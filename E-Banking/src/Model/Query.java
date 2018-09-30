@@ -16,6 +16,7 @@ abstract class Query {
             (
             "CREATE TABLE IF NOT EXISTS accounts (" +
                     "accountnum INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "username TEXT UNIQUE NOT NULL," +
                     "first_name varchar(30) NOT NULL, " +
                     "last_name varchar(30) NOT NULL, " +
                     "gender TEXT,"+
@@ -31,14 +32,14 @@ abstract class Query {
 
     ADD =
             (
-            "INSERT INTO accounts (first_name,last_name,gender,nationality,mobile,dob,pin,balance) VALUES " +
-                    "(?, ?, ?, ?, ?, ?, ?, ?);"
+            "INSERT INTO accounts (username,first_name,last_name,gender,nationality,mobile,dob,pin,balance) VALUES " +
+                    "(?,?, ?, ?, ?, ?, ?, ?, ?);"
             ),
             
     ADD1 =  
             (
             "INSERT INTO accounts VALUES" +
-                    "(1000,?,?,?,?,?,?,?,?)"
+                    "(1000,?,?,?,?,?,?,?,?,?)"
             ),
 
     DEL =
@@ -53,7 +54,7 @@ abstract class Query {
 
     GET =
             (
-            "SELECT * FROM accounts WHERE accountnum = ?;"
+            "SELECT * FROM accounts WHERE username = ?;"
             );
 
 }
