@@ -7,7 +7,7 @@ package Model;
 
 /**
  *
- * @author manojleena
+ * @author Rashmil
  */
 abstract class Query {
 
@@ -39,7 +39,7 @@ abstract class Query {
     ADD1 =  
             (
             "INSERT INTO accounts VALUES" +
-                    "(1000,?,?,?,?,?,?,?,?,?)"
+                "(1000,?,?,?,?,?,?,?,?,?)"
             ),
 
     DEL =
@@ -56,9 +56,9 @@ abstract class Query {
                     ),        
     EDIT =  (
             "UPDATE accounts " +
-                    "SET balance = ? " +
-                    "WHERE username = ? " +
-                    ";"
+                "SET balance = ? " +
+                "WHERE username = ? " +
+                ";"
             ),
     
     GET =

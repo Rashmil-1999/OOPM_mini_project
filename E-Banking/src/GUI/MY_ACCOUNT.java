@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
 import javax.swing.JOptionPane;
@@ -11,7 +6,7 @@ import Model.DatabaseFile;
 
 /**
  *
- * @author priyal
+ * @author Rashmil-Priyal-Richa.
  */
 public class MY_ACCOUNT extends javax.swing.JFrame {
     AccountModel user;
@@ -19,6 +14,8 @@ public class MY_ACCOUNT extends javax.swing.JFrame {
 
     /**
      * Creates new form MY_ACCOUNT
+     * @param user
+     * @param db
      */
     public MY_ACCOUNT(AccountModel user,DatabaseFile db) {
         initComponents();
@@ -536,7 +533,7 @@ public class MY_ACCOUNT extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_WithdrawBtnActionPerformed
-    
+    //Fill the values of the labels with the user details.
     private void set_field_values(){
         L_Name.setText(user.getName());
         WL_Name.setText(user.getName());
@@ -560,7 +557,7 @@ public class MY_ACCOUNT extends javax.swing.JFrame {
         L_Gender.setText(user.getGender());
         L_Mobile.setText(user.getMobile());
     }
-    
+    //Function to Update the balance Fields when the balance is changed.
     private void updatebalance(){
         D_Balance.setText(String.valueOf(user.getBalance()));
         VB_Balance.setText(String.valueOf(user.getBalance()));

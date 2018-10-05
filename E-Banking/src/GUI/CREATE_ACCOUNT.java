@@ -1,30 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 //custom imports
-import Model.AccountModel;
 import Model.DatabaseFile;
+import java.awt.HeadlessException;
 //default files imports
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import java.sql.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 /**
  *
  * @author RA_PR_RI
  */
 public class CREATE_ACCOUNT extends javax.swing.JFrame {
-    DatabaseFile db;
-    protected String name,gender="",last_name,nationality,acc_type="",dob,mobile,username;
+    DatabaseFile db;                                                                        //Database connection object.
+    protected String name,gender="",last_name,nationality,acc_type="",dob,mobile,username;  //Varible declaration.
     protected int accnum,pin;
 
     /**
      * Creates new form CREATE_ACCOUNT
+     * @param db
      */
     public CREATE_ACCOUNT(DatabaseFile db) {
         initComponents();
@@ -251,22 +244,23 @@ public class CREATE_ACCOUNT extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CREATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CREATEActionPerformed
-       
+        //getting Field values.
         name = C_Name.getText(); 
         last_name = C_Lastname.getText();
         nationality = C_Nationality.getText();    
         mobile = C_Mobile.getText();
         dob = C_Dob.getText();
         username = C_Username.getText();
-        
-        if(name == "" || last_name == "" || nationality == "" || mobile == "" || dob == "" || username == "" || gender == "" || acc_type == "" || acc_type == "SELECT"){
+        //Checking for empty fields
+        if("".equals(name) || "".equals(last_name) || "".equals(nationality) || "".equals(mobile) || "".equals(dob) || "".equals(username) || "".equals(gender) || "".equals(acc_type) || "SELECT".equals(acc_type)){
             JOptionPane.showMessageDialog(null, "Empty Feilds Not Allowed!", "Attention!", JOptionPane.ERROR_MESSAGE);
         }
         else{
             
             try{
-                pin = Integer.parseInt(C_Pin.getText());
+                pin = Integer.parseInt(C_Pin.getText());//Conversion from String to Integer.
             }catch(NumberFormatException e){
+                //Throw a error dialogueBox if entered pin is not an Integer.
                 JOptionPane.showMessageDialog(null, "INVALID  OR MISSING INPUT , ONLY INTEGERS ACCEPTED FOR Pin!", "Attention!", JOptionPane.ERROR_MESSAGE);
             }
         
@@ -292,8 +286,7 @@ public class CREATE_ACCOUNT extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Username already exists choose again!", "Attention!", JOptionPane.ERROR_MESSAGE);
                         C_Username.setText("");
                     }
-                }catch(Exception e){
-                    e.printStackTrace();
+                }catch(HeadlessException e){
                 }
             }
         }

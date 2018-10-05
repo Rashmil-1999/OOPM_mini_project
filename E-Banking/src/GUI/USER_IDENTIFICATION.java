@@ -1,22 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 import Model.AccountModel;
 import Model.DatabaseFile;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author priyal
+ * @author Rashmil-Priyal-Richa.
  */
 public class USER_IDENTIFICATION extends javax.swing.JFrame {
-    DatabaseFile db = new DatabaseFile();
+    DatabaseFile db = new DatabaseFile();//creation of DatabaseFile object
+    
     /**
      * Creates new form USER_IDENTIFICATION
      */
@@ -141,16 +135,18 @@ public class USER_IDENTIFICATION extends javax.swing.JFrame {
             int pin = 0;
         
             String username = L_Username.getText();
-            if(username == ""){
+            if("".equals(username)){
+                //If the username field is empty then show Error DialogueBox.
                 JOptionPane.showMessageDialog(null, "Username required!", "Attention!", JOptionPane.ERROR_MESSAGE);
             }
-            pin = Integer.parseInt(L_Pin.getText());
-            AccountModel user = db.getAccount(username);
+            pin = Integer.parseInt(L_Pin.getText());//Conversion of pin to Integer.
+            AccountModel user = db.getAccount(username);//Gets the account of the User from the database. 
             if(user.getPIN() == pin){
                 L_Username.setText("");
                 L_Pin.setText("");
                 MY_ACCOUNT acc = new MY_ACCOUNT(user,db);
                 java.awt.EventQueue.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                         acc.setVisible(true);
                     }
@@ -168,6 +164,7 @@ public class USER_IDENTIFICATION extends javax.swing.JFrame {
     private void CreateNewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateNewBtnActionPerformed
         CREATE_ACCOUNT obj = new CREATE_ACCOUNT(db);
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 obj.setVisible(true);
             }

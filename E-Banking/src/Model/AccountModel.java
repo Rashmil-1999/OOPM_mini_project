@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 /**
  *
- * @author Ra-Pr-Ri
+ * @author Rashmil
  */
 public class AccountModel {
     private  final String first_name,last_name,DoB,gender,nationality,mobile,username;
@@ -16,11 +11,16 @@ public class AccountModel {
   
     /**
      *
+     * @param username
      * @param name
      * @param last_name
+     * @param gender
+     * @param nationality
+     * @param mobile
      * @param DoB
      * @param pin
      * @param balance
+     * @param accountnum
      */
     public AccountModel(String username,String name,String last_name,String gender,String nationality,String mobile,String DoB,int pin ,int balance ,int accountnum){
         this.username = username;
